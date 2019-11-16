@@ -62,8 +62,7 @@ class _HomePageState extends State<HomePage> {
             child: NotificationListener(
               // ignore: missing_return
               onNotification: (scrollNotification) {
-                if (scrollNotification is ScrollUpdateNotification &&
-                    scrollNotification.depth == 0) {
+                if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
                   //滚动且是列表滚动的时候
                   _onScroll(scrollNotification.metrics.pixels);
                 }

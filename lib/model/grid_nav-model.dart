@@ -27,13 +27,7 @@ class GridNavItem {
   final CommonModel item4;
 
   GridNavItem(
-      {this.startColor,
-      this.endColor,
-      this.mainItem,
-      this.item1,
-      this.item2,
-      this.item3,
-      this.item4});
+      {this.startColor, this.endColor, this.mainItem, this.item1, this.item2, this.item3, this.item4});
 
   factory GridNavItem.fromJson(Map<String, dynamic> json) {
     return GridNavItem(

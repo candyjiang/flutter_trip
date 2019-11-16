@@ -55,8 +55,7 @@ class _TabNavigatorState extends State<TabNavigator> {
       activeIcon: Icon(icon, color: _activeColor),
       title: Text(
         title,
-        style: TextStyle(
-            color: _currentIndex != index ? _defaultColor : _activeColor),
+        style: TextStyle(color: _currentIndex != index ? _defaultColor : _activeColor),
       ),
     );
   }
