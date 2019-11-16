@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_trip/dao/home-dao.dart';
+import 'package:flutter_trip/model/home_model.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -29,7 +33,22 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       appBarAlpha = alpha;
     });
-    print(appBarAlpha);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  _loadData() async {
+    try {
+      HomeModel homeModel = await HomeDao.fetch();
+      String resultString = json.encode(homeModel.config);
+      print(resultString);
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
