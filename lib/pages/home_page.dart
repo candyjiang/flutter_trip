@@ -1,9 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_trip/dao/home-dao.dart';
+import 'package:flutter_trip/model/common_model.dart';
+import 'package:flutter_trip/model/grid_nav-model.dart';
 import 'package:flutter_trip/model/home_model.dart';
+import 'package:flutter_trip/widget/grid-nav.dart';
+import 'package:flutter_trip/widget/local-nav.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,6 +23,10 @@ class _HomePageState extends State<HomePage> {
   static const APPBAR_SCROLL_OFFSET = 100;
 
   double appBarAlpha = 0;
+
+  List<CommonModel> _localNavList;
+
+  GridNavModel _gridNavModel;
 
   // ignore: non_constant_identifier_names
   _onScroll(Offset) {
@@ -44,8 +50,10 @@ class _HomePageState extends State<HomePage> {
   _loadData() async {
     try {
       HomeModel homeModel = await HomeDao.fetch();
-      String resultString = json.encode(homeModel.config);
-      print(resultString);
+      setState(() {
+        _localNavList = homeModel.localNavList;
+        _gridNavModel = homeModel.gridNav;
+      });
     } catch (e) {
       print(e);
     }
@@ -54,6 +62,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff2f2f2),
       body: Stack(
         children: <Widget>[
           MediaQuery.removePadding(
@@ -74,21 +83,26 @@ class _HomePageState extends State<HomePage> {
                     child: Swiper(
                       itemCount: _imageUrls.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Image.network(
-                          _imageUrls[index],
-                          fit: BoxFit.fill,
-                        );
+                        return Image.network(_imageUrls[index], fit: BoxFit.fill);
                       },
                       autoplay: true,
                       pagination: SwiperPagination(),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
+                    child: LocalNav(localNavList: _localNavList),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(7, 0, 7, 4),
+                    child: GridNav(gridNavModel: _gridNavModel),
+                  ),
                   Container(
-                    height: 800,
+                    height: 500,
                     child: ListTile(
-                      title: Text('Hahha'),
+                      title: Text(''),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

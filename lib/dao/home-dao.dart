@@ -11,7 +11,7 @@ class HomeDao {
     if (response.statusCode == 200) {
       // fix 中文乱码
       Utf8Decoder utf8decoder = Utf8Decoder();
-      var result = json.decode(utf8decoder.convert(response.bodyBytes));
+      Map<String, dynamic> result = json.decode(utf8decoder.convert(response.bodyBytes));
       return HomeModel.fromJson(result);
     } else {
       throw Exception('请求失败');
