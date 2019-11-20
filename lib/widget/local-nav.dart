@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_trip/model/common_model.dart';
 
+/// 首页-球区入口
 class LocalNav extends StatelessWidget {
   final List<CommonModel> localNavList;
 
