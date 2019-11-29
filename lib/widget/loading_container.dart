@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// loading 布局
 class LoadingContainer extends StatelessWidget {
   // 是否加载中...
   final bool isLoading;

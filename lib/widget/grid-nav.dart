@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_trip/model/common_model.dart';
 import 'package:flutter_trip/model/grid_nav-model.dart';
 
-// 首页-网格入口
+/// 首页-网格入口
 class GridNav extends StatelessWidget {
   final GridNavModel gridNavModel;
 
