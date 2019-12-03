@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 enum SearchBarType { home, normal, homeLight }
 
 class SearchBar extends StatefulWidget {
-
   /// 是否禁止搜索
   final bool enabled;
 
@@ -36,9 +35,9 @@ class SearchBar extends StatefulWidget {
 
   const SearchBar(
       {Key key,
-      this.enabled,
+      this.enabled = true,
       this.hideLeft,
-      this.searchBarType,
+      this.searchBarType = SearchBarType.home,
       this.hint,
       this.defaultText,
       this.leftButtonClick,
@@ -72,7 +71,7 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   /// 搜索页搜索框
-  _genNormalSearch() {
+  Widget _genNormalSearch() {
     return Container(
       child: Row(
         children: <Widget>[
@@ -139,17 +138,6 @@ class _SearchBarState extends State<SearchBar> {
     );
   }
 
-  Widget _wrapTap(Widget widget, void Function() callback) {
-    return GestureDetector(
-      onTap: () {
-        if (callback != null) {
-          callback();
-        }
-      },
-      child: widget,
-    );
-  }
-
   Widget _inputBox() {
     Color inputBoxColor;
     if (widget.searchBarType == SearchBarType.home) {
@@ -158,7 +146,7 @@ class _SearchBarState extends State<SearchBar> {
       inputBoxColor = Color(int.parse('0xffEDEDED'));
     }
     return Container(
-      height: 40,
+      height: 30,
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       decoration: BoxDecoration(
         color: inputBoxColor,
@@ -204,7 +192,18 @@ class _SearchBarState extends State<SearchBar> {
     );
   }
 
-  _onChanged(String text) {
+  Widget _wrapTap(Widget widget, void Function() callback) {
+    return GestureDetector(
+      onTap: () {
+        if (callback != null) {
+          callback();
+        }
+      },
+      child: widget,
+    );
+  }
+
+  void _onChanged(String text) {
     if (text.length > 0) {
       setState(() {
         showClear = true;
@@ -216,7 +215,7 @@ class _SearchBarState extends State<SearchBar> {
     }
   }
 
-  _homeFontColor() {
+  Color _homeFontColor() {
     return widget.searchBarType == SearchBarType.homeLight ? Colors.black54 : Colors.white;
   }
 }
